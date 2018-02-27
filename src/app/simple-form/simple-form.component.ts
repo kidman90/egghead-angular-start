@@ -4,13 +4,24 @@ import { EventEmitter } from '@angular/core/src/facade/async';
 @Component({
   selector: 'app-simple-form',
   template: `
-    <input #myInput type="text" [(ngModel)]="message">
+    <input
+      #myInput
+      type="text"
+      [(ngModel)]="message"
+      [ngClass]="{ mousedown: isMousedown }"
+      (mousedown)="isMousedown = true"
+      (mouseup)="isMousedown = false"
+    >
     <button (click)="update.emit({ text: message })">Click me!</button>
   `,
   styles: [`
     :host {
       display: flex;
       flex-direction: column;
+    }
+
+    .mousedown {
+      border: 2px solid green;
     }
 
     * {
@@ -28,6 +39,8 @@ import { EventEmitter } from '@angular/core/src/facade/async';
   `]
 })
 export class SimpleFormComponent implements OnInit {
+
+  isMousedown;
 
   @Input() message;
 
