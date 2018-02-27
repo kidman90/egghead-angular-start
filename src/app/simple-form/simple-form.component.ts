@@ -1,7 +1,10 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, ViewEncapsulation } from '@angular/core';
 import { EventEmitter } from '@angular/core/src/facade/async';
 
 @Component({
+  // encapsulation: ViewEncapsulation.Native,
+  encapsulation: ViewEncapsulation.Emulated,
+  // encapsulation: ViewEncapsulation.None,
   selector: 'app-simple-form',
   template: `
     <input
@@ -12,7 +15,9 @@ import { EventEmitter } from '@angular/core/src/facade/async';
       (mousedown)="isMousedown = true"
       (mouseup)="isMousedown = false"
     >
-    <button (click)="update.emit({ text: message })">Click me!</button>
+    <button
+      class="white bg-black code"
+      (click)="update.emit({ text: message })">Click me!</button>
   `,
   styles: [`
     :host {
